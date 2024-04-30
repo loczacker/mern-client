@@ -13,6 +13,9 @@ import UploadBook from "../dashboard/UploadBook";
 import Dashboard from "../dashboard/Dashboard";
 import ManageBooks from "../dashboard/ManageBooks";
 import EditBooks from "../dashboard/EditBooks";
+import SignIn from "../dashboard/SignIn";
+import SignOut from "../dashboard/SignOut";
+import Profile from "../dashboard/Profile";
 
   const router = createBrowserRouter([
     {
@@ -39,6 +42,26 @@ import EditBooks from "../dashboard/EditBooks";
           path: '/book/:id',
           element: <SingleBook/>,
           loader: ({params}) => fetch(`http://localhost:5001/book/${params.id}`)
+        },
+        {
+          path: '/about',
+          element: <About/>
+        },
+        {
+          path: '/profile',
+          element: <Profile/>
+        },
+        {
+          path: '/sign-in',
+          element: <SignIn/>
+        },
+        {
+          path: '/sign-up',
+          element: <SignUp/>
+        },
+        {
+          path: '/sign-out',
+          element: <SignOut/>
         }
       ]
     },
