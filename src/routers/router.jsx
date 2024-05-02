@@ -44,24 +44,8 @@ import Profile from "../dashboard/Profile";
           loader: ({params}) => fetch(`http://localhost:5001/book/${params.id}`)
         },
         {
-          path: '/about',
-          element: <About/>
-        },
-        {
-          path: '/profile',
-          element: <Profile/>
-        },
-        {
           path: '/sign-in',
           element: <SignIn/>
-        },
-        {
-          path: '/sign-up',
-          element: <SignUp/>
-        },
-        {
-          path: '/sign-out',
-          element: <SignOut/>
         }
       ]
     },

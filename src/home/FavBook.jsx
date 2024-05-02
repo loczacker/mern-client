@@ -13,8 +13,9 @@ const FavBook = () => {
             <h2 className='text-5xl font-bold my-5 md:w-3/4 leading-snug'>Find Your Favorite <span
             className='text-blue-700'>Book Here!</span></h2>
             <p className='mb-10 text-lg md:w-5/6'>
-                Trong thế giới tươi đẹp nhưng đầy bí ẩn của hành tinh Xanh, một bóng đen lạ kì bắt đầu xuất hiện, mang theo những âm mưu và nguy cơ tàn phá.
-                Liệu nhóm nhân vật trẻ tuổi có thể khám phá sự thật đằng sau bóng đen này và ngăn chặn mối đe dọa tiềm ẩn?
+                In the beautiful yet mysterious world of the planet Green, a strange dark shadow begins to emerge,
+                 carrying with it plots and the threat of destruction.
+                  Can a group of young characters uncover the truth behind this shadow and thwart the looming danger?
             </p>
             {/* stats */}
             <div className='flex flex-col sm:flex-row justify-between gap-6 md:w-3/4 my-14'>

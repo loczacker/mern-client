@@ -50,14 +50,13 @@ const Review = () => {
                 <FaStar/>
                 <FaStar/>
                 <FaStar/>
-                <FaStar/>
+                
             </div>
 
             {/* text */}
             <div>
                 <p className='mb-7'>
-                    Trong thế giới tươi đẹp nhưng đầy bí ẩn của hành tinh Xanh, một bóng đen lạ kì bắt đầu xuất hiện, mang theo những âm mưu và nguy cơ tàn phá.
-                    Liệu nhóm nhân vật trẻ tuổi có thể khám phá sự thật đằng sau bóng đen này và ngăn chặn mối đe dọa tiềm ẩn?
+                Giao hàng nhanh, hệ thống ổn định, đầu sách mới, tôi sẽ ủng hộ lâu dài.
                 </p>
                 <Avatar img={proPic} alt="avatar of Jese" rounded className='w-10 mb-4' />
                 <h5 className='text-lg font-medium'>Mark Ping</h5>
@@ -100,8 +99,10 @@ const Review = () => {
             {/* text */}
             <div>
                 <p className='mb-7'>
-                    Trong thế giới tươi đẹp nhưng đầy bí ẩn của hành tinh Xanh, một bóng đen lạ kì bắt đầu xuất hiện, mang theo những âm mưu và nguy cơ tàn phá.
-                    Liệu nhóm nhân vật trẻ tuổi có thể khám phá sự thật đằng sau bóng đen này và ngăn chặn mối đe dọa tiềm ẩn?
+                    In the beautiful yet mysterious world of the planet Green,
+                     a strange dark shadow begins to emerge,
+                      carrying with it plots and the threat of destruction.
+                       Can a group of young characters uncover the truth behind this shadow and thwart the looming danger?
                 </p>
                 <Avatar img={proPic} alt="avatar of Jese" rounded className='w-10 mb-4' />
                 <h5 className='text-lg font-medium'>Mark Ping</h5>
@@ -144,8 +145,8 @@ const Review = () => {
             {/* text */}
             <div>
                 <p className='mb-7'>
-                    Trong thế giới tươi đẹp nhưng đầy bí ẩn của hành tinh Xanh, một bóng đen lạ kì bắt đầu xuất hiện, mang theo những âm mưu và nguy cơ tàn phá.
-                    Liệu nhóm nhân vật trẻ tuổi có thể khám phá sự thật đằng sau bóng đen này và ngăn chặn mối đe dọa tiềm ẩn?
+                The latest books in both English and Vietnamese will be continuously updated.
+                 We always meet your needs, listen to your contributions, constantly develop, and always change.
                 </p>
                 <Avatar img={proPic} alt="avatar of Jese" rounded className='w-10 mb-4' />
                 <h5 className='text-lg font-medium'>Mark Ping</h5>
