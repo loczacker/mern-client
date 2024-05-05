@@ -1,98 +1,143 @@
-import React, { useEffect, useState } from 'react'
-import { Link, NavLink } from 'react-router-dom';
-import { FaBarsStaggered, FaBlog, FaXmark } from "react-icons/fa6";
+import React, { useEffect, useState } from "react";
+import { FaBlog } from "react-icons/fa6";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
+import { ThemeProvider, THEME_ID, createTheme } from '@mui/material/styles';
+import { theme } from "flowbite-react";
+import { Switch } from "@mui/material";
+
+const navLinks = [
+    {name: 'Home', route: '/'},
+    {name: 'About', route: '/about'},
+    {name: 'Shop', route: '/shop'},
+    {name: 'Sell Your Book', route: '/admin/dashboard'},
+];
+
+const materialTheme = createTheme({
+    palette: {
+        primary: {
+            main: "#ff0000",
+        },
+        secondary: {
+            main: "#00ff00",
+        }
+    }
+});
 
 const Navbar = () => {
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [isSticky, setIsSticky] = useState(false);
-    const user = false;
+        const navigate = useNavigate();
+        const location = useLocation();
+        const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+        const [isHome, setIsHome] = useState(false);
+        const [isLogin, setIsLogin] = useState(false);
+        const [scrollPosition, setScrollPosition] = useState(0);
+        const [isFixed, setIsFixed] = useState(false);
+        const [isDarkMode, setIsDarkMode] = useState(false);
+        const [navBg, setNavBg] = useState('bg-[#15151580]');
+        const user = false;
 
-    // toggle menu
-    const toggleMenu = () => {
-        setIsMenuOpen(!isMenuOpen);
-    }
+        const toggleMobileMenu = () => {
+            setIsMobileMenuOpen(!isMobileMenuOpen)
+        };
 
-    useEffect(() => {
-        const handleScroll = () => {
-            if(window.scrollY > 100){
-                setIsSticky(true);
+        useEffect(() => {
+            const darkBook = 'dark';
+            const root = window.document.documentElement;
+            if(isDarkMode){
+                root.classList.add(darkBook);
+            } else {
+                root.classList.remove(darkBook);
             }
-            else {
-                setIsSticky(false);
-            }
-        }
+        }, [isDarkMode]);
 
-        window.addEventListener("scroll", handleScroll);
+        useEffect(() => {
+            setIsHome(location.pathname === '/');
+            setIsLogin(location.pathname === '/login');
+            setIsFixed(location.pathname === '/register' || location.pathname === '/login');
+        }, [location]);
 
-        return () => {
-            window.addEventListener("scroll", handleScroll);
-        }
-    }, [])
+        useEffect(() => {
+            const handleScroll = () => {
+                const currentPosition = window.pageYOffset;
+                setScrollPosition(currentPosition);
+            };
+            window.addEventListener('scroll', handleScroll);
+            return () => window.removeEventListener('scroll', handleScroll);
+        }, []);
 
-    //navItems here
-    const navItems = [
-        {link: 'Home', path: '/'},
-        {link: 'About', path: '/about'},
-        {link: 'Shop', path: '/shop'},
-        {link: 'Sell Your Book', path: '/admin/dashboard'},
-        {link: 'Blog', path: '/blog'}
-    ]
-
-    const navLinks = [
-        {name: 'Home', route: '/'},
-        {name: 'About', route: '/about'},
-        {name: 'Shop', route: '/shop'},
-        {name: 'Sell Your Book', route: '/admin/dashboard'},
-        {name: 'Blog', path: '/blog'}
-    ]
-
-  return (
-    <header className='w-full bg-transparent fixed top-0 left-0 right-0 translate-all ease-in duration-300'>
-        <nav className={`py-4 lg:px-24 px-4 ${isSticky ? "sticky top-0 left-0 right-0 bg-blue-300" : ""}`}>
-            <div className='flex justify-between items-center text-base gap-8'>
-                {/* logo */}
-                <Link to='/' className='text-2xl font-bold text-blue-700 flex items-center gap-2'>
-                <FaBlog className='inline-block'/>Books</Link>
-
-                {/* nav item for large device */}
-                <ul className='md:flex space-x-12 hidden'>
-                    {
-                        navItems.map(({link, path}) => <Link key={path} to={path}
-                        className='block text-base text-black uppercase cursor-pointer hover:text-blue-700'>{link}</Link>)
-                    }
-                </ul>
-
-                {/* btn for lg devices */}
-                <div className='space-x-12 hidden lg:flex items-center'>
-                    <button><FaBarsStaggered className='w-5 hover:text-blue-700'/></button>
-                </div>
-
-                {/* menu btn for the mobile devices */}
-                <div className='md:hidden'>
-                    <button onClick={toggleMenu} className='text-black focus:outline-none'>
-                        {
-                            isMenuOpen ? <FaXmark className='h-5 w-5 text-black'/> : <FaBarsStaggered
-                            className='h-5 w-5 text-black'
-                            />
-                        }
-                    </button>
-                </div>
-            </div>
-
-            {/* navitems for sm devices */}
-            <div className={`space-x-4 px-4 mt-16 py-7 bg-blue-700 
-            ${isMenuOpen?"block fixed top-0 right-0 left-0" : "hidden"}`}>
-                {
-                    navItems.map(({link, path}) => <Link key={path} to={path}
-                    className='block text-base text-white uppercase cursor-pointer'>{link}</Link>)
+        useEffect(()=> {
+            if(scrollPosition > 100) {
+                if(isHome) {
+                    setNavBg('bg-white backdrop-filter backdrop-blur-xl bg-opacity-0 dark:text-white text-black')
                 }
-            </div>
+                else {
+                    setNavBg('bg-white dark:bg-black dark:text-white text-black')
+                }
+            } else {
+                setNavBg(`${isHome || location.pathname === '/' ? 'bg-transparent' : 'bg-white dark:bg-black'}
+                dark:text-white text-white`)
+            }
+        }, [scrollPosition])
+    return (
+        <nav className="">
+            <div className="lg:w-[95%] mx-auto sm:px-6 lg:px-6">
+                <div className="px-4 py-4 flex items-center justify-between">
+                    {/* logo */}
+                    <div>
+                        <Link to='/' className='text-2xl font-bold text-blue-700 flex items-center gap-2'>
+                        <FaBlog className='inline-block'/>BooksMaster</Link>
+                        <p className="font-bold text-[13px] tracking-[8px]">Books Knowledge</p>
+                    </div>
 
-            {/* Based on users
-            <NavLink>Login</NavLink> */}
+                    {/* mobile menu icons */}
+
+                    {/* Navigational Links */}
+                    <div className="hidden md:block text-black dark:text-white">
+                        <div className="flex">
+                            <ul className="ml-10 flex items-center space-x-4 pr-4">
+                                {
+                                    navLinks.map((link) => (
+                                        <li key={link.route}>
+                                            <NavLink
+                                            to={link.route}
+                                            className={({ isActive }) => 
+                                                `font-bold ${isActive ? 'text-secondary' : `${navBg.includes('bg-transparent') ?
+                                                'text-white' : 'text-black dark:text-white'}`} hover:text-secondary duration-300`    
+                                            }
+                                            >
+                                            {link.name}
+                                            </NavLink>
+                                        </li>
+                                    ))}
+
+                                {/* based on users */}
+                                {
+                                    user ? null: isLogin ?  <li><NavLink to="/register"
+                                className={({ isActive }) => 
+                                `font-bold ${isActive ? 'text-secondary' : `${navBg.includes('bg-transparent') ?
+                                'text-white' : 'text-black dark:text-white'}`} hover:text-secondary duration-300`    
+                                }>Register</NavLink></li> :  <li><NavLink to="/login"
+                                className={({ isActive }) => 
+                                `font-bold ${isActive ? 'text-secondary' : `${navBg.includes('bg-transparent') ?
+                                'text-white' : 'text-black dark:text-white'}`} hover:text-secondary duration-300`    
+                                }>Login</NavLink></li>
+                                }
+                                
+                                {/* color toggle */}
+                                <li>
+                                    <ThemeProvider theme={theme}>
+                                        <div className="flex flex-col justify-center items-center">
+                                            {/* <Switch onChange={() => setIsDarkMode(!isDarkMode)}/> */}
+                                            <h1 className="text-[8px]">Light/Dark</h1>
+                                        </div>
+                                    </ThemeProvider>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </nav>
-    </header>
-  )
+    )
 }
 
 export default Navbar

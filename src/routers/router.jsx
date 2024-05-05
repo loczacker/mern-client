@@ -2,7 +2,6 @@ import {
     createBrowserRouter,
     RouterProvider,
   } from "react-router-dom";
-import App from "../App";
 import Home from "../home/Home";
 import Shop from "../shop/Shop";
 import About from "../components/About";
@@ -15,6 +14,8 @@ import ManageBooks from "../dashboard/ManageBooks";
 import EditBooks from "../dashboard/EditBooks";
 import Signup from "../components/Signup";
 import Login from "../components/Login";
+import MainLayout from "../layout/MainLayout";
+import App from "../App";
 
   const router = createBrowserRouter([
     {
