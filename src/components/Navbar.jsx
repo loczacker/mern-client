@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { FaBarsStaggered, FaBlog, FaXmark } from "react-icons/fa6";
 
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isSticky, setIsSticky] = useState(false);
+    const user = false;
 
     // toggle menu
     const toggleMenu = () => {
@@ -34,9 +35,17 @@ const Navbar = () => {
         {link: 'About', path: '/about'},
         {link: 'Shop', path: '/shop'},
         {link: 'Sell Your Book', path: '/admin/dashboard'},
-        {link: 'Blog', path: '/blog'},
-        {link: 'SignIn', path: '/sign-in'},
+        {link: 'Blog', path: '/blog'}
     ]
+
+    const navLinks = [
+        {name: 'Home', route: '/'},
+        {name: 'About', route: '/about'},
+        {name: 'Shop', route: '/shop'},
+        {name: 'Sell Your Book', route: '/admin/dashboard'},
+        {name: 'Blog', path: '/blog'}
+    ]
+
   return (
     <header className='w-full bg-transparent fixed top-0 left-0 right-0 translate-all ease-in duration-300'>
         <nav className={`py-4 lg:px-24 px-4 ${isSticky ? "sticky top-0 left-0 right-0 bg-blue-300" : ""}`}>
@@ -46,7 +55,6 @@ const Navbar = () => {
                 <FaBlog className='inline-block'/>Books</Link>
 
                 {/* nav item for large device */}
-
                 <ul className='md:flex space-x-12 hidden'>
                     {
                         navItems.map(({link, path}) => <Link key={path} to={path}
@@ -79,6 +87,9 @@ const Navbar = () => {
                     className='block text-base text-white uppercase cursor-pointer'>{link}</Link>)
                 }
             </div>
+
+            {/* Based on users
+            <NavLink>Login</NavLink> */}
         </nav>
     </header>
   )
