@@ -5,8 +5,11 @@ import FavBook from './FavBook';
 import PromoBanner from './PromoBanner';
 import OtherBooks from './OtherBooks';
 import Review from './Review';
+import useAuth from '../hooks/useAuth';
 
 const Home = () => {
+  const {user} = useAuth();
+  console.log(user);
   return (
     <div>
       <Banner/>
@@ -17,6 +20,6 @@ const Home = () => {
       <Review/>
     </div>
   )
-}
+} 
 
 export default Home;

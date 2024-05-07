@@ -9,12 +9,15 @@ import {
   QueryClientProvider,
   useQuery,
 } from '@tanstack/react-query'
+import AuthProvider from './ultilities/providers/AuthProvider.jsx'
 
 const queryClient = new QueryClient();
 
 Aos.init();
 ReactDOM.createRoot(document.getElementById('root')).render(
+  <AuthProvider>
   <QueryClientProvider client={queryClient}>
     <RouterProvider router={router}/>
   </QueryClientProvider>
+  </AuthProvider>
 )

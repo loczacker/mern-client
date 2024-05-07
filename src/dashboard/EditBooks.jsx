@@ -4,7 +4,7 @@ import { Button, Checkbox, Label, Select, TextInput, Textarea } from "flowbite-r
 
 const EditBooks = () => {
   const {id} = useParams();
-  const {bookTitle, authorName, imageURL, category, bookDescription, bookPDFURL} = useLoaderData();
+  const {bookTitle, authorName, imageURL, category, bookDescription, bookPDFURL, price} = useLoaderData();
 
   const bookCategories = [
     "Fiction",
@@ -42,10 +42,11 @@ const EditBooks = () => {
     const imageURL = form.imageURL.value;
     const category = form.categoryName.value;
     const bookDescription = form.bookDescription.value;
-    const bookPDFURL = form.bookPDFURL.value
+    const bookPDFURL = form.bookPDFURL.value;
+    const price = form.price.value;
     
     const updateBookObj = {
-      bookTitle, authorName, imageURL, category, bookDescription, bookPDFURL
+      bookTitle, authorName, imageURL, category, bookDescription, bookPDFURL, price
     }
 
     // console.log(bookObj)
@@ -130,6 +131,15 @@ const EditBooks = () => {
         </div>
         <TextInput id="bookPDFURL" name='bookPDFURL' type="text" placeholder="Book pdf url" required
         defaultValue={bookPDFURL} />
+      </div>
+
+      {/* price book */}
+      <div>
+      <div className="mb-2 block">
+          <Label htmlFor="price" value="Price" />
+        </div>
+        <TextInput id="price" name='price' type="text" placeholder="Price book" required
+        defaultValue={price} />
       </div>
 
       <Button type="submit" className='mt-5'>Update Book</Button>

@@ -12,10 +12,9 @@ import UploadBook from "../dashboard/UploadBook";
 import Dashboard from "../dashboard/Dashboard";
 import ManageBooks from "../dashboard/ManageBooks";
 import EditBooks from "../dashboard/EditBooks";
-import Signup from "../components/Signup";
 import Login from "../components/Login";
-import MainLayout from "../layout/MainLayout";
 import App from "../App";
+import Register from "../components/Register";
 
   const router = createBrowserRouter([
     {
@@ -42,7 +41,15 @@ import App from "../App";
           path: '/book/:id',
           element: <SingleBook/>,
           loader: ({params}) => fetch(`http://localhost:5001/book/${params.id}`)
-        }
+        },
+        {
+          path:'/login',
+          element: <Login/>
+        },
+        {
+          path:'/register',
+          element: <Register/>
+        },
       ]
     },
     {
@@ -67,14 +74,6 @@ import App from "../App";
           loader: ({params}) => fetch(`http://localhost:5001/book/${params.id}`)
         }
       ]
-    },
-    {
-      path: 'sign-up',
-      element: <Signup/>
-    },
-    {
-      path:'login',
-      element: <Login/>
     }
   ]);
 

@@ -46,7 +46,7 @@ const ManageBooks = () => {
             </Table.Cell>
             <Table.Cell>{book.authorName}</Table.Cell>
             <Table.Cell>{book.category}</Table.Cell>
-            <Table.Cell>$10.00</Table.Cell>
+            <Table.Cell>${book.price}</Table.Cell>
             <Table.Cell>
               <Link to= {`/admin/dashboard/edit-books/${book._id}`}
                className="font-medium text-cyan-600 hover:underline dark:text-cyan-500 mr-5">

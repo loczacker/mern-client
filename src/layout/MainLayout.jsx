@@ -1,4 +1,3 @@
-import React from 'react'
 import { Outlet } from 'react-router-dom'
 import MyFooter from '../components/MyFooter'
 import Navbar from '../components/Navbar'
