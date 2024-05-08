@@ -26,6 +26,7 @@ const Register = () => {
             name: user?.displayName,
             email: user?.email,
             role: 'user',
+            about: "Is not specified"
           };
           if(user.email && user.displayName) {
             return axios.post('http://localhost:5001/new-user', userImp)
