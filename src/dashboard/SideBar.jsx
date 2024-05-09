@@ -3,7 +3,7 @@ import { Sidebar } from "flowbite-react";
 import { BiBuoy } from "react-icons/bi";
 import { HiArrowSmRight, HiChartPie, HiInbox, HiOutlineCloudUpload, HiShoppingBag, HiTable, HiUser, HiViewBoards } from "react-icons/hi";
 
-import userImg from '../assets/profile.jpg'
+import userImg from '../assets/open-book.png'
 
 
 export const SideBar = () => {

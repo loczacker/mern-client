@@ -15,6 +15,9 @@ import EditBooks from "../dashboard/EditBooks";
 import Login from "../components/Login";
 import App from "../App";
 import Register from "../components/Register";
+import DashboardNew from "../dashboard/DashboardNew";
+import DashboardLayoutNew from "../dashboard/DashboardLayoutNew";
+import UserCP from "../dashboard/User/UserCP";
 
   const router = createBrowserRouter([
     {
@@ -72,6 +75,23 @@ import Register from "../components/Register";
           path: '/admin/dashboard/edit-books/:id',
           element: <EditBooks/>,
           loader: ({params}) => fetch(`http://localhost:5001/book/${params.id}`)
+        }
+      ]
+    },
+
+    {
+      path: '/dashboard',
+      element:<DashboardLayoutNew/>,
+      children: [
+        {
+          index: true,
+           element:<DashboardNew/>
+        },
+
+        //User routes
+        {
+          path: "user",
+          element: <UserCP/>
         }
       ]
     }
