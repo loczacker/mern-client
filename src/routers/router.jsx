@@ -8,16 +8,22 @@ import About from "../components/About";
 import Blog from "../components/Blog";
 import SingleBook from "../shop/SingleBook";
 import DashboardLayout from "../dashboard/DashboardLayout";
-import UploadBook from "../dashboard/UploadBook";
+import UploadBook from "../dashboard/Admin/UploadBook";
 import Dashboard from "../dashboard/Dashboard";
-import ManageBooks from "../dashboard/ManageBooks";
-import EditBooks from "../dashboard/EditBooks";
+import ManageBooks from "../dashboard/Admin/ManageBooks";
+import EditBooks from "../dashboard/Admin/EditBooks";
 import Login from "../components/Login";
 import App from "../App";
 import Register from "../components/Register";
 import DashboardNew from "../dashboard/DashboardNew";
 import DashboardLayoutNew from "../dashboard/DashboardLayoutNew";
 import UserCP from "../dashboard/User/UserCP";
+import SelectedBooks from "../dashboard/User/SelectedBooks";
+import MyPaymentHistory from "../dashboard/User/MyPaymentHistory";
+import ApplyForInstructor from "../dashboard/User/ApplyForInstructor";
+import AdminHome from "../dashboard/Admin/AdminHome";
+import ManageUsers from "../dashboard/Admin/ManageUsers";
+import UpdateUsers from "../dashboard/Admin/UpdateUsers";
 
   const router = createBrowserRouter([
     {
@@ -90,8 +96,43 @@ import UserCP from "../dashboard/User/UserCP";
 
         //User routes
         {
-          path: "user",
+          path: 'user',
           element: <UserCP/>
+        },
+        {
+          path: 'my-selected',
+          element: <SelectedBooks/>
+        },
+        {
+          path: 'my-payments',
+          element: <MyPaymentHistory/>
+        },
+        {
+          path: 'apply-instructor',
+          element: <ApplyForInstructor/>
+        },
+
+        //Admin Routes
+        {
+          path: 'admin-home',
+          element: <AdminHome/>
+        },
+        {
+          path: 'manage-users',
+          element: <ManageUsers/>
+        },
+        {
+          path: 'manage-book',
+          element: <ManageBooks/>
+        },
+        {
+          path: 'upload-book',
+          element: <UploadBook/>
+        },
+        {
+          path: "update-user/:id",
+          element: <UpdateUsers/>,
+          loader: ({params}) => fetch(`http://localhost:5001/users/${params.id}`)
         }
       ]
     }

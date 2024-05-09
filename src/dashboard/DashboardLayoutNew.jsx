@@ -9,12 +9,13 @@ import { MdBrowseGallery, MdIntegrationInstructions, MdOfflineBolt, MdPayments }
 import Swal from 'sweetalert2';
 import Scroll from '../hooks/useScroll';
 import { HashLoader } from 'react-spinners';
+import bookImg from '../assets/awardbooks.png'
 
 const adminNavItems = [
   { to: "/dashboard/admin-home", icon: <BiHomeAlt className='text-2xl' />, label: "Dashboard Home" },
   { to: "/dashboard/manage-users", icon: <FaUsers className='text-2xl' />, label: "Manage Users" },
   { to: "/dashboard/manage-book", icon: <BsBook className='text-2xl' />, label: "Manage Books" },
-  { to: "/dashboard/manage-applicatons", icon: <BsApp className='text-2xl' />, label: "Applications" },
+  { to: "/dashboard/upload-book", icon: <BsApp className='text-2xl' />, label: "Upload Books" },
 ]
 
 const userNavItems = [
@@ -80,7 +81,7 @@ const DashboardLayoutNew = () => {
           "w-[90px] overflow-auto"} bg-white h-screen p-5 md:block hidden pt-8 relative duration-300`}>
         <div className='flex gap-x-4 items-center'>
           <img onClick={() => setOpen(!open)}
-            src='src/assets/awardbooks.png'
+            src={bookImg}
             className={`cursor-pointer h-[40px] duration-500 ${open && "rotate-[360deg]"}`} />
           <Link to= '/'>
             <h1

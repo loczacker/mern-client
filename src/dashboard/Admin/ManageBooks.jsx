@@ -27,6 +27,7 @@ const ManageBooks = () => {
       <Table className='lg:w-[1180px]'>
         <Table.Head>
           <Table.HeadCell>NO.</Table.HeadCell>
+          <Table.HeadCell>Photo</Table.HeadCell>
           <Table.HeadCell>Book Name</Table.HeadCell>
           <Table.HeadCell>Author Name</Table.HeadCell>
           <Table.HeadCell>Category</Table.HeadCell>
@@ -40,6 +41,9 @@ const ManageBooks = () => {
           <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
             <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
               {index + 1}
+            </Table.Cell>
+            <Table.Cell>
+              <img src={book.imageURL} alt='' className='h-[70px] w-[50px]'/>
             </Table.Cell>
             <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
               {book.bookTitle}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { FaBlog } from "react-icons/fa6";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { ThemeProvider, THEME_ID, createTheme } from '@mui/material/styles';
@@ -8,6 +8,9 @@ import {motion} from 'framer-motion';
 
 import photoURL from "../assets/profile.jpg";
 import {FaBars} from "react-icons/fa";
+import { AuthContext } from "../ultilities/providers/AuthProvider";
+import Swal from "sweetalert2";
+import useUser from "../hooks/useUser";
 
 const navLinks = [
     { name: 'Home', route: '/' },
@@ -36,7 +39,8 @@ const Navbar = () => {
     const [isFixed, setIsFixed] = useState(false);
     const [isDarkMode, setIsDarkMode] = useState(false);
     const [navBg, setNavBg] = useState('bg-[#15151580]');
-    const user = true;
+    const {logout, user} = useContext(AuthContext);
+    const { currentUser } = useUser();
 
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen)
@@ -81,8 +85,31 @@ const Navbar = () => {
         }
     }, [scrollPosition])
 
-    const handleLogout = () => {
+    const handleLogout = (e) => {
+        e.preventDefault();
         console.log("Logged out");
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, logout me!"
+          }).then((result) => {
+            if (result.isConfirmed) {
+
+                logout().then(() => {
+                    Swal.fire({
+                        title: "Logged Out!!",
+                        text: "Your successfully logged out.",
+                        icon: "success"
+                      });
+                }).catch(err => {
+                    Swal.fire("Error!", err.message, "error")
+                })
+            }
+          });
     }
 
     return (
@@ -172,7 +199,7 @@ const Navbar = () => {
 
                                 {
                                     user && <li>
-                                        <NavLink to='/admin/dashboard' className={({ isActive }) => 
+                                        <NavLink to='/dashboard' className={({ isActive }) => 
                                             `font-bold ${
                                                 isActive
                                                 ? "text-secondary"
@@ -188,7 +215,7 @@ const Navbar = () => {
 
                                 {
                                     user && <li>
-                                        <img src={photoURL} alt=""
+                                        <img src={currentUser && currentUser.photoURL ? currentUser.photoURL : photoURL} alt=""
                                             className="h-[40px] rounded-full w-[40px]"
                                         />
                                     </li>
