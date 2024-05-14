@@ -19,7 +19,7 @@ const ManageBooks = () => {
     })
   }
   return (
-    <div className='px-4 my012'>
+    <div className='px-4 my-12'>
       <h2 className='mb-8 text-3xl font-bold'>Manage Your Books</h2>
 
       {/* table for book data */}
@@ -52,7 +52,7 @@ const ManageBooks = () => {
             <Table.Cell>{book.category}</Table.Cell>
             <Table.Cell>${book.price}</Table.Cell>
             <Table.Cell>
-              <Link to= {`/admin/dashboard/edit-books/${book._id}`}
+              <Link to= {`/dashboard/edit-books/${book._id}`}
                className="font-medium text-cyan-600 hover:underline dark:text-cyan-500 mr-5">
                 Edit
               </Link>

@@ -21,7 +21,7 @@ const Login = () => {
     // console.log(formData);
     login(formData.email, formData.password).then(() => {
       alert("Login successfull!")
-      navigate(location.state?.form || '/dashboard')
+      navigate(location.state?.form || '/')
     }).catch((err) => {
       setError(err.code);
       setLoader(false);

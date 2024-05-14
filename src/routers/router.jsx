@@ -7,16 +7,14 @@ import Shop from "../shop/Shop";
 import About from "../components/About";
 import Blog from "../components/Blog";
 import SingleBook from "../shop/SingleBook";
-import DashboardLayout from "../dashboard/DashboardLayout";
 import UploadBook from "../dashboard/Admin/UploadBook";
-import Dashboard from "../dashboard/Dashboard";
 import ManageBooks from "../dashboard/Admin/ManageBooks";
 import EditBooks from "../dashboard/Admin/EditBooks";
 import Login from "../components/Login";
 import App from "../App";
 import Register from "../components/Register";
-import DashboardNew from "../dashboard/DashboardNew";
-import DashboardLayoutNew from "../dashboard/DashboardLayoutNew";
+import DashboardNew from "../dashboard/Dashboard";
+import DashboardLayoutNew from "../dashboard/DashboardLayout";
 import UserCP from "../dashboard/User/UserCP";
 import SelectedBooks from "../dashboard/User/SelectedBooks";
 import MyPaymentHistory from "../dashboard/User/MyPaymentHistory";
@@ -24,6 +22,7 @@ import ApplyForInstructor from "../dashboard/User/ApplyForInstructor";
 import AdminHome from "../dashboard/Admin/AdminHome";
 import ManageUsers from "../dashboard/Admin/ManageUsers";
 import UpdateUsers from "../dashboard/Admin/UpdateUsers";
+import MyFavoriteBook from "../dashboard/User/MyFavoriteBook";
 
   const router = createBrowserRouter([
     {
@@ -61,29 +60,6 @@ import UpdateUsers from "../dashboard/Admin/UpdateUsers";
         },
       ]
     },
-    {
-      path: '/admin/dashboard',
-      element:<DashboardLayout/>,
-      children: [
-        {
-          path: '/admin/dashboard',
-          element: <Dashboard/>
-        },
-        {
-          path: '/admin/dashboard/upload',
-          element: <UploadBook/>
-        },
-        {
-          path: '/admin/dashboard/manage',
-          element: <ManageBooks/>
-        },
-        {
-          path: '/admin/dashboard/edit-books/:id',
-          element: <EditBooks/>,
-          loader: ({params}) => fetch(`http://localhost:5001/book/${params.id}`)
-        }
-      ]
-    },
 
     {
       path: '/dashboard',
@@ -98,6 +74,10 @@ import UpdateUsers from "../dashboard/Admin/UpdateUsers";
         {
           path: 'user',
           element: <UserCP/>
+        },
+        {
+          path: 'my-favorite-book',
+          element: <MyFavoriteBook/>
         },
         {
           path: 'my-selected',
@@ -122,6 +102,11 @@ import UpdateUsers from "../dashboard/Admin/UpdateUsers";
           element: <ManageUsers/>
         },
         {
+          path:'update-user/:id',
+          element: <UpdateUsers/>,
+          loader: ({params}) => fetch(`http://localhost:5001/users/${params.id}`)
+        },
+        {
           path: 'manage-book',
           element: <ManageBooks/>
         },
@@ -130,10 +115,21 @@ import UpdateUsers from "../dashboard/Admin/UpdateUsers";
           element: <UploadBook/>
         },
         {
+          path: 'edit-books/:id',
+          element: <EditBooks/>,
+          loader: ({params}) => fetch(`http://localhost:5001/book/${params.id}`)
+        },
+        {
           path: "update-user/:id",
           element: <UpdateUsers/>,
           loader: ({params}) => fetch(`http://localhost:5001/users/${params.id}`)
+        },
+        {
+          path: 'edit-books/:id',
+          element: <EditBooks/>,
+          loader: ({params}) => fetch(`http://localhost:5001/book/${params.id}`)
         }
+        
       ]
     }
   ]);
