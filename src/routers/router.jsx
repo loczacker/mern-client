@@ -18,11 +18,11 @@ import DashboardLayoutNew from "../dashboard/DashboardLayout";
 import UserCP from "../dashboard/User/UserCP";
 import SelectedBooks from "../dashboard/User/SelectedBooks";
 import MyPaymentHistory from "../dashboard/User/MyPaymentHistory";
-import ApplyForInstructor from "../dashboard/User/ApplyForInstructor";
 import AdminHome from "../dashboard/Admin/AdminHome";
 import ManageUsers from "../dashboard/Admin/ManageUsers";
 import UpdateUsers from "../dashboard/Admin/UpdateUsers";
 import MyFavoriteBook from "../dashboard/User/MyFavoriteBook";
+import Payment from "../dashboard/User/Payment/Payment";
 
   const router = createBrowserRouter([
     {
@@ -88,8 +88,12 @@ import MyFavoriteBook from "../dashboard/User/MyFavoriteBook";
           element: <MyPaymentHistory/>
         },
         {
-          path: 'apply-instructor',
-          element: <ApplyForInstructor/>
+          path: 'user/payment',
+          element: <Payment/>
+        },
+        {
+          path: 'my-favourite',
+          element: <MyFavoriteBook/>
         },
 
         //Admin Routes

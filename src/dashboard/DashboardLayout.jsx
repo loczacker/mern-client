@@ -21,8 +21,8 @@ const adminNavItems = [
 const userNavItems = [
   { to: "/dashboard/user", icon: <BiHomeAlt className='text-2xl' />, label: "Dashboard" },
   { to: "/dashboard/my-selected", icon: <BiSelectMultiple className='text-2xl' />, label: "My Selected" },
-  { to: "/dashboard/my-payments", icon: <MdPayments className='text-2xl' />, label: "Manage Books" },
-  { to: "/dashboard/apply-instructor", icon: <MdIntegrationInstructions className='text-2xl' />, label: "Apply for Instructor" },
+  { to: "/dashboard/my-payments", icon: <MdPayments className='text-2xl' />, label: "Payment History" },
+  { to: "/dashboard/my-favourite", icon: <MdIntegrationInstructions className='text-2xl' />, label: "Favourite Book" },
 ]
 
 const lastMenuItems = [
@@ -35,7 +35,7 @@ const lastMenuItems = [
   { to: "/browse", icon: <MdBrowseGallery className='text-2xl' />, label: "Following" },
 ]
 
-const DashboardLayoutNew = () => {
+const DashboardLayoutNew = () => { 
   const [open, setOpen] = useState(true);
   const { loader, logout } = useAuth();
   const { currentUser } = useUser();
@@ -66,7 +66,7 @@ const DashboardLayoutNew = () => {
   }
 
   if(loader) {
-    return <div className='flex justify-center items-center h-screen'>
+    return <div className='flex items-center h-screen'>
     <HashLoader color="#36d7b7"
     size={50} />
     </div>
@@ -167,7 +167,7 @@ return (
 
       </div>
 
-      <div className='w-full p-4'>
+      <div className='h-screen overflow-y-auto justify-center px-8'>
         <Scroll/>
         <Outlet/>
       </div>
