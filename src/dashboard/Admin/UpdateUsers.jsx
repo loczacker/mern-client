@@ -60,32 +60,6 @@ const handleFormSubmit = (e) => {
               </div>
               <div className='grid grid-cols-1 gap-4 sm:grid-cols-2'>
                 <div>
-                  <label className='ml-2' htmlFor='users'>Email</label>
-                  <p className='text-[12px] ml-2 text-red-400'>Update email is not recommended. Please leave it default</p>
-                  <input
-                    className='w-full mt-2 rounded-lg border outline-none border-secondary p-3 text-sm'
-                    placeholder='Email address'
-                    type='email'
-                    required
-                    defaultValue={userCredentials?.email}
-                    name='email'
-                    id='email'
-                  />
-                </div>
-                <div>
-                  <label className='ml-2' htmlFor='phone'>Skills</label>
-                  <p className='text-[12px] ml-2 text-red-400'>If the user is an instrutor, then set skills, otherwise, leave it empty</p>
-                  <input
-                    className='w-full mt-2 rounded-lg border outline-none border-secondary p-3 text-sm'
-                    placeholder='Skills'
-                    defaultValue={userCredentials?.skills ? userCredentials?.skills : ''}
-                    type='text'
-                    name='skills'
-                  />
-                </div>
-              </div>
-              <div className='grid grid-cols-1 gap-4 sm:grid-cols-2'>
-                <div>
                   <label className='ml-2' htmlFor='address'>Address</label>
                   <input
                     className='w-full mt-2 rounded-lg border outline-none border-secondary p-3 text-sm'
@@ -107,65 +81,6 @@ const handleFormSubmit = (e) => {
                     type='text'
                   />
                 </div>
-              </div>
-              <h1>Please select a role</h1>
-              <div className='grid grid-cols-1 gap-4 text-center sm:grid-cols-3'>
-                  <div>
-                    <input
-                      className='peer sr-only'
-                      id='option1'
-                      type='radio'
-                      value='user'
-                      defaultChecked={userCredentials?.role === 'user' ? true : false}
-                      tabIndex="-1"
-                      name='option'
-                    />
-                    <label
-                      htmlFor='option1'
-                      className='block w-full rounded-lg border border-secondary p-3 peer-checked:border-secondary
-                      peer-checked:bg-secondary peer-checked:text-white'
-                      tabIndex='0'
-                    ><span className='text-sm font-medium'>User</span>
-                    </label>
-                  </div>
-                  <div>
-                    <input
-                      className='peer sr-only'
-                      id='option2'
-                      type='radio'
-                      value='admin'
-                      defaultChecked={userCredentials?.role === 'admin' ? true : false}
-                      tabIndex='-1'
-                      name='option'
-                    />
-                    <label 
-                      htmlFor='option2'
-                      className='block w-full rounded-lg border border-secondary p-3 peer-checked:border-secondary
-                      peer-checked:bg-secondary peer-checked:text-white'
-                      tabIndex='0'
-                      >
-                        <span className='text-sm font-medium'>Admin</span>
-                      </label>
-                  </div>
-                  <div>
-                    <input
-                      className='peer sr-only'
-                      id='option3'
-                      value='instructor'
-                      type='radio'
-                      defaultChecked={userCredentials?.role === 'instructor' ? true: false}
-                      tabIndex='-1'
-                      name='option'
-                    />
-                    <label
-                      htmlFor='option3'
-                      className='block w-full rounded-lg border border-secondary p-3 peer-checked:bg-secondary
-                      peer-checked:text-white'
-                      tabIndex='0'
-                      >
-                        <span className='text-sm font-medium'>Instructor</span>
-                      </label>
-                  </div>
               </div>
               <div>
                 <label className='sr-only' htmlFor='message'>About</label>

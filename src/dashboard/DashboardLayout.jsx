@@ -35,7 +35,7 @@ const lastMenuItems = [
   { to: "/browse", icon: <MdBrowseGallery className='text-2xl' />, label: "Following" },
 ]
 
-const DashboardLayoutNew = () => { 
+const DashboardLayout = () => { 
   const [open, setOpen] = useState(true);
   const { loader, logout } = useAuth();
   const { currentUser } = useUser();
@@ -167,7 +167,7 @@ return (
 
       </div>
 
-      <div className='h-screen overflow-y-auto justify-center px-8'>
+      <div className='w-full'>
         <Scroll/>
         <Outlet/>
       </div>
@@ -175,4 +175,4 @@ return (
   )
 }
 
-export default DashboardLayoutNew
+export default DashboardLayout

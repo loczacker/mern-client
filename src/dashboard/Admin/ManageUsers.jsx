@@ -4,12 +4,15 @@ import useAxiosSecure from '../../hooks/useAxiosSecure';
 import { useNavigate } from 'react-router-dom';
 import { GrUpdate } from "react-icons/gr";
 import { FcDeleteDatabase } from "react-icons/fc";
+import useUser from '../../hooks/useUser';
 
 const ManageUsers = () => {
     const axiosFetch = useAxiosFetch();
     const axiosSecure = useAxiosSecure();
     const navigate = useNavigate();
     const [users, setUsers] = useState([]);
+    const { currentUser } = useUser();
+    const role = currentUser?.role;
     useEffect(() => {
         axiosFetch.get('/users').then(res => setUsers(res.data)).catch(err => console.log(err))
     }, [])
@@ -49,14 +52,16 @@ const ManageUsers = () => {
                                         </td>
                                         <td className='whitespace-nowrap px-6 py-4'>{user.name}</td>
                                         <td className='whitespace-nowrap px-6 py-4'>{user.role}</td>
-                                        <td className='whitespace-nowrap px-6 py-4'>
+                                        {user.role !== 'admin' &&
+                                        (<td className='whitespace-nowrap px-6 py-4'>
                                             <span onClick={() => navigate(`/dashboard/update-user/${user._id}`)} className='inline-flex items-center gap-2
                                             cursor-pointer bg-green-500 py-1 rounded-md px-2 text-white'>Update <GrUpdate className='text-white'/></span>
-                                        </td>
+                                        </td>)}
+                                        {user.role !== 'admin' && (
                                         <td className='whitespace-nowrap px-6 py-4'>
-                                        <span onClick={() => handleDelete(user._id)} className='inline-flex items-center gap-2 cursor-pointer bg-red-600
-                                        py-1 rounded-md px-2 text-white'>Delete <FcDeleteDatabase/></span>
+                                        <span onClick={() => handleDelete(user._id)} className='inline-flex items-center gap-2 cursor-pointer bg-red-600 py-1 rounded-md px-2 text-white'>Delete <FcDeleteDatabase /></span>
                                         </td>
+                                        )}
                                     </tr>)
                                 }
                             </tbody>

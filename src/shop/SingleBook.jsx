@@ -1,19 +1,20 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { useLoaderData } from 'react-router-dom'
 import useUser from '../hooks/useUser';
 import useAxiosFetch from '../hooks/useAxiosFetch';
 import useAxiosSecure from '../hooks/useAxiosSecure';
+import { AuthContext } from '../ultilities/providers/AuthProvider';
 
 const SingleBook = () => {
   const {_id, bookTitle, authorName, imageURL,category, 
     bookDescription, bookPDFURL, price }= useLoaderData();
   const [activeImg, setActiveImg] = useState({imageURL})
   const [amount, setAmount] = useState(1)
+  const { currentUser } = useUser();
+  const role = currentUser?.role;
+  const { user } = useContext(AuthContext);
+
   return (
-    // <div className='mt-28 px-4 lg:px-24'>
-    // <img src={imageURL} alt='' className='h-96'/>
-    // <h2>{bookTitle}</h2>
-    // </div>
     <div className='max-w-7xl mx-auto p-8 mt-28 px-4 lg:px-24'>
       <div className='flex flex-col justify-between lg:flex-row gap-16 lg:items-center'>
         <div className='flex flex-col gap-6 lg:w-full'>
@@ -41,7 +42,11 @@ const SingleBook = () => {
                 setAmount((prev) => prev + 1)
               }}>+</button>
             </div> */}
-            <button className='bg-violet-800 text-white font-semibold py-3 px-6 rounded-xl h-full'>Add to cart</button>
+            <button
+            title={role === 'admin' ? 'Admin can not be able to select' : ''}
+            disabled={role === 'admin'}
+            className='bg-violet-800 text-white  disabled:bg-red-300 font-semibold py-3 px-6 rounded-xl h-full hover:bg-red-700'
+            >Add to cart</button>
           </div>
         </div>
       </div>
