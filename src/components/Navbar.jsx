@@ -6,7 +6,7 @@ import { theme } from "flowbite-react";
 import { Switch } from "@mui/material";
 import {motion} from 'framer-motion';
 
-import photoURL from "../assets/profile.jpg";
+import photoURL from "../assets/profile.png";
 import {FaBars} from "react-icons/fa";
 import { AuthContext } from "../ultilities/providers/AuthProvider";
 import Swal from "sweetalert2";

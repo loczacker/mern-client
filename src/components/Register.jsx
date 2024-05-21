@@ -25,6 +25,7 @@ const Register = () => {
           const userImp = {
             name: user?.displayName,
             email: user?.email,
+            photoURL: "",
             role: 'user',
             address: "Is not Provided",
             phone: "Is not Provided",
