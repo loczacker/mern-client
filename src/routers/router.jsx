@@ -5,7 +5,6 @@ import {
 import Home from "../home/Home";
 import Shop from "../shop/Shop";
 import About from "../components/About";
-import Blog from "../components/Blog";
 import SingleBook from "../shop/SingleBook";
 import UploadBook from "../dashboard/Admin/UploadBook";
 import ManageBooks from "../dashboard/Admin/ManageBooks";
@@ -40,10 +39,6 @@ import Payment from "../dashboard/User/Payment/Payment";
         {
             path: '/about',
             element: <About/>
-        },
-        {
-            path: '/blog',
-            element: <Blog/>
         },
         {
           path: '/book/:id',

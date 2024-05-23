@@ -13,6 +13,11 @@ const SingleBook = () => {
   const { currentUser } = useUser();
   const role = currentUser?.role;
   const { user } = useContext(AuthContext);
+  const axiosSecure = useAxiosSecure();
+
+  const handleSelect = (_id, bookTitle) => {
+  }
+
 
   return (
     <div className='max-w-7xl mx-auto p-8 mt-28 px-4 lg:px-24'>
@@ -43,6 +48,7 @@ const SingleBook = () => {
               }}>+</button>
             </div> */}
             <button
+            onClick={() => handleSelect(_id, bookTitle)}
             title={role === 'admin' ? 'Admin can not be able to select' : ''}
             disabled={role === 'admin'}
             className='bg-violet-800 text-white  disabled:bg-red-300 font-semibold py-3 px-6 rounded-xl h-full hover:bg-red-700'

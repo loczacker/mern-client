@@ -33,7 +33,7 @@ const Shop = () => {
   }
 
   //handle add to cart
-  const handleSelect = (id) => {
+  const handleSelect = (id, bookTitle) => {
     axiosSecure.get(`/book/${id}`)
     // .then(res => setBooks(res.data)).catch(err => console.log(err));
     if (!currentUser) {
@@ -48,6 +48,7 @@ const Shop = () => {
         } else {
           const data = {
             bookId: id,
+            bookTitle: bookTitle,
             userMail: currentUser.email,
             data: new Date()
           }
@@ -90,7 +91,7 @@ const Shop = () => {
                 >
                   <div className='absolute inset-0 flex items-center justify-center'>
                     <button
-                      onClick={() => handleSelect(book._id)}
+                      onClick={() => handleSelect(book._id, book.bookTitle)}
                       title={role === 'admin' ? 'Admin can not be able to select' : ''}
                       disabled={role === 'admin'}
                       className='px-4 py-2 text-white disabled:bg-red-300
