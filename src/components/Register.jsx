@@ -23,6 +23,7 @@ const Register = () => {
       if(user) {
         return updateUser(data.name).then(() => {
           const userImp = {
+            _id: user.uid,
             name: user?.displayName,
             email: user?.email,
             photoURL: "",

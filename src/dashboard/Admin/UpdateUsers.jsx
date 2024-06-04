@@ -16,7 +16,7 @@ const UpdateUsers = () => {
         e.preventDefault();
         const formData = new FormData(e.target);
         const updatedData = Object.fromEntries(formData);
-        axiosSecure.put(`/update-user/${userCredentials?._id}`, updatedData).then(res => {
+        axiosSecure.patch(`/update-user/${userCredentials?._id}`, updatedData).then(res => {
             if (res.data.modifiedCount > 0) {
                 alert("User updated successfully!");
             }
@@ -85,17 +85,6 @@ const UpdateUsers = () => {
                                         defaultValue={userCredentials?.address}
                                         name='address'
                                         type='text'
-                                    />
-                                </div>
-                                <div>
-                                    <label className='ml-2' htmlFor='photoURL'>Photo URL</label>
-                                    <input
-                                        className='w-full mt-2 rounded-lg border outline-none border-secondary p-3 text-sm'
-                                        placeholder='Photo URL'
-                                        name='photoURL'
-                                        type='text'
-                                        defaultValue={userCredentials?.photoURL}
-                                        onBlur={handleURLChange}
                                     />
                                 </div>
                             </div>

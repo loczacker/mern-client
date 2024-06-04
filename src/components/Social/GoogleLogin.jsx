@@ -16,7 +16,9 @@ const GoogleLogin = () => {
                     email: user?.email,
                     photoURL: user?.photoURL,
                     role: 'user',
-                    about: "Is not specified"
+                    address:"Is not Provided",
+                    phone:"Is not Provided",
+                    about: "Is not Provided"
                 }
 
                 if(user.email && user.displayName) {

@@ -2,8 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import { FaBlog } from "react-icons/fa6";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { ThemeProvider, THEME_ID, createTheme } from '@mui/material/styles';
-import { theme } from "flowbite-react";
-import { Switch } from "@mui/material";
 import {motion} from 'framer-motion';
 
 import photoURL from "../assets/profile.png";
@@ -14,7 +12,6 @@ import useUser from "../hooks/useUser";
 
 const navLinks = [
     { name: 'Home', route: '/' },
-    { name: 'About', route: '/about' },
     { name: 'Shop', route: '/shop' },
 ];
 
@@ -225,16 +222,6 @@ const Navbar = () => {
                                     user && <li><NavLink onClick={handleLogout}
                                     className={'font-bold px-3 py-2 bg-secondary text-white rounded-xl'}> Logout</NavLink></li>
                                 }
-
-                                {/* color toggle */}
-                                <li>
-                                    <ThemeProvider theme={theme}>
-                                        <div className="flex flex-col justify-center items-center">
-                                            {/* <Switch onChange={() => setIsDarkMode(!isDarkMode)}/> */}
-                                            <h1 className="text-[8px]">Light/Dark</h1>
-                                        </div>
-                                    </ThemeProvider>    
-                                </li>
                             </ul>
                         </div>
                     </div>

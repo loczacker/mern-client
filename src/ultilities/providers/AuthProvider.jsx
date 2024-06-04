@@ -16,7 +16,7 @@ const AuthProvider = ({children}) => {
       try {
         setLoader(true);
         return await createUserWithEmailAndPassword(auth, email, password)
-      } catch (error) {
+      } catch (error) { 
         setError(error.code);
         throw error;
       }

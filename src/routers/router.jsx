@@ -4,7 +4,6 @@ import {
   } from "react-router-dom";
 import Home from "../home/Home";
 import Shop from "../shop/Shop";
-import About from "../components/About";
 import SingleBook from "../shop/SingleBook";
 import UploadBook from "../dashboard/Admin/UploadBook";
 import ManageBooks from "../dashboard/Admin/ManageBooks";
@@ -35,10 +34,6 @@ import Payment from "../dashboard/User/Payment/Payment";
         {
             path: '/shop',
             element: <Shop/>
-        },
-        {
-            path: '/about',
-            element: <About/>
         },
         {
           path: '/book/:id',

@@ -4,12 +4,15 @@ import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import GoogleLogin from './Social/GoogleLogin';
 import useAuth from '../hooks/useAuth';
+import useUser from '../hooks/useUser';
 
 const Login = () => {
 
   const [showPassword, setShowPassword] = useState(false);
   const location = useLocation();
   const {login, error, setError, loader, setLoader} = useAuth()
+  const { currentUser } = useUser();
+  const role = currentUser?.role;
   const navigate = useNavigate();
 
   const handleSubmit = e => {
@@ -18,7 +21,6 @@ const Login = () => {
 
     const data = new FormData(e.target);
     const formData = Object.fromEntries(data)
-    // console.log(formData);
     login(formData.email, formData.password).then(() => {
       alert("Login successfull!")
       navigate(location.state?.form || '/')

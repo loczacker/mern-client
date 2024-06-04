@@ -20,6 +20,7 @@ const ManageUsers = () => {
         axiosSecure.delete(`/delete-user/${id}`).then(res => {
             alert("User deleted successfully")
         }).catch(err => console.log(err))
+        window.location.reload();
     }
   return (
     <div>
