@@ -26,13 +26,16 @@ const CheckoutPayment = ({price, cartItem}) => {
     }).catch((err) => console.log(err))
     },[])
 
+    console.log(cart)
+ 
     useEffect(() => {
         axiosSecure.post('/create-payment-intent', {price: price}).then(res => {
+            console.log(res.data)
             setClientSecret(res.data.clientSecret)
         });
     },[]);
 
-    const handleSubmit =async (event) => {
+    const handleSubmit = async (event) => {
         setMessage('');
         event.preventDefault();
         if(!stripe || !elements) {
@@ -45,7 +48,7 @@ const CheckoutPayment = ({price, cartItem}) => {
 
         const {error, paymentMethod} = await stripe.createPaymentMethod({
             type: 'card',
-            card: card,
+            card
         });
         if(error) {
             console.log(error);
@@ -53,11 +56,65 @@ const CheckoutPayment = ({price, cartItem}) => {
         } else {
             console.log('[PaymentMethod]', paymentMethod)
         }
+
+        const {paymentIntent, error: confirmError} = await stripe.confirmCardPayment(clientSecret, {
+            payment_method:{
+                card: card,
+                billing_details: {
+                    name: currentUser?.name || "Unknown",
+                    email: currentUser?.email|| "Anonymous",
+                },
+            }
+        })
+
+        if(confirmError){
+            console.log("[Confirm Error]", confirmError)
+        } else {
+            console.log("[Payment Intent]", paymentIntent)
+            if(paymentIntent.status === "succeeded") {
+                const transactionId = paymentIntent.id;
+                const paymentMethod = paymentIntent.payment_method;
+                const amount = paymentIntent.amount / 100;
+                const currency = paymentIntent.currency;
+                const paymentStatus = paymentIntent.status;
+                const userName = currentUser?.name;
+                const userEmail = currentUser?.email;
+
+                const data = {
+                    transactionId,
+                    paymentMethod,
+                    amount,
+                    currency,
+                    paymentStatus,
+                    userName,
+                    userEmail,
+                    bookId: cartItem ? [cartItem] : cart,
+                    date: new Date()
+                }
+                
+                fetch(URL, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        authorization: `Bearer ${localStorage.getItem('token')}`
+                    },
+                    body: JSON.stringify(data)
+                }).then(res => res.json()).then(res => {
+                    console.log(res)
+                    if(res.deletedResult.deletedCount > 0 && res.paymentResult.insertedId) {
+                        setSucceeded("Payment Successful, You can now access your book.");
+                    } else {
+                        setSucceeded('Payment Failed, Please try again..')
+                    }
+                }).catch(err => console.log(err))
+            }
+        }
+
     };
 
   return (
     <>
-        <div className='text-center justify-center'>
+        <div className='text-center'>
             <h1 className='text-2xl font-bold'>
                 Paymnet Amount: <span className='text-secondary'>{price}$</span>
             </h1>
@@ -78,7 +135,9 @@ const CheckoutPayment = ({price, cartItem}) => {
                 }
             }/>
 
-            <button type='submit' disabled={isLoading || !stripe || !clientSecret}>Pay</button>
+        <button className='mt-5' type='submit' disabled={isLoading || !stripe || !clientSecret}>
+        Pay
+        </button>
             {message && <p className='text-red-500'>{message}</p>}
             {succeeded && <p className='text-green-500'>{succeeded}</p>}
         </form>

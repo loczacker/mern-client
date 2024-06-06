@@ -4,54 +4,60 @@ import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 
 const GoogleLogin = () => {
-    const {googleLogin} = useAuth();
+    const { googleLogin } = useAuth();
     const navigate = useNavigate();
+
     const handleLogin = () => {
-        googleLogin().then((userCredential) => {
+        googleLogin().then(async (userCredential) => {
             const user = userCredential.user;
             console.log(user);
-            if(user) {
+            if (user) {
                 const userImp = {
+                    _id: user.uid,
                     name: user?.displayName,
                     email: user?.email,
-                    photoURL: user?.photoURL,
+                    photoURL: user?.photoURL || "https://i.pinimg.com/564x/d0/7b/a6/d07ba6dcf05fa86c0a61855bc722cb7a.jpg",
                     role: 'user',
-                    address:"Is not Provided",
-                    phone:"Is not Provided",
+                    address: "Is not Provided",
+                    phone: "Is not Provided",
                     about: "Is not Provided"
                 }
 
-                if(user.email && user.displayName) {
-                    return axios.post('http://localhost:5001/new-user', userImp)
-                    .then(() => {
-                      navigate('/');
-                      return "Registration Successfull!";
-                    })
-                    .catch((error) => {
-                      console.error("Error when adding new user:", error);
-                      // Xử lý lỗi ở đây
-                    });
-                } 
+                if (user.email && user.displayName) {
+                    try {
+                        // Kiểm tra email tồn tại
+                        const emailCheck = await axios.get(`http://localhost:5001/check-email/${user.email}`);
+                        if (!emailCheck.data.exists) {
+                            await axios.post('http://localhost:5001/new-user', userImp);
+                            navigate('/');
+                            console.log("Registration Successful!");
+                        } else {
+                            console.log("Email already exists.");
+                            navigate('/');
+                        }
+                    } catch (error) {
+                        console.error("Error when checking or adding new user:", error);
+                    }
+                }
             }
-            
         }).catch((error) => {
             // Handle Errors here.
-            const errorCode = error.code;
             const errorMessage = error.message;
             console.log(errorMessage);
         });
     };
-  return (
-    <div className="flex items-center justify-center my-3">
-        <button 
-        onClick={() => handleLogin()}
-        className="flex items-center outline-none bg-white border border-gray-300 
-        rounded-lg shadow-md px-6 py-4 text-sm font-medium text-gray-800 hover:bg-gray-200 focus:outline-none">
-        <FcGoogle className="h-6 w-6 mr-2"/>
-            <span>Continue with Google</span>
-        </button>
-    </div>
-  )
+
+    return (
+        <div className="flex items-center justify-center my-3">
+            <button 
+            onClick={() => handleLogin()}
+            className="flex items-center outline-none bg-white border border-gray-300 
+            rounded-lg shadow-md px-6 py-4 text-sm font-medium text-gray-800 hover:bg-gray-200 focus:outline-none">
+            <FcGoogle className="h-6 w-6 mr-2"/>
+                <span>Continue with Google</span>
+            </button>
+        </div>
+    )
 }
 
-export default GoogleLogin
+export default GoogleLogin;

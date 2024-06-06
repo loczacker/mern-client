@@ -15,12 +15,12 @@ import DashboardNew from "../dashboard/Dashboard";
 import DashboardLayoutNew from "../dashboard/DashboardLayout";
 import UserCP from "../dashboard/User/UserCP";
 import SelectedBooks from "../dashboard/User/SelectedBooks";
-import MyPaymentHistory from "../dashboard/User/MyPaymentHistory";
 import AdminHome from "../dashboard/Admin/AdminHome";
 import ManageUsers from "../dashboard/Admin/ManageUsers";
 import UpdateUsers from "../dashboard/Admin/UpdateUsers";
 import MyFavoriteBook from "../dashboard/User/MyFavoriteBook";
 import Payment from "../dashboard/User/Payment/Payment";
+import MyPaymentHistory from "../dashboard/User/Payment/History/MyPaymentHistory";
 
   const router = createBrowserRouter([
     {

@@ -4,7 +4,6 @@ import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { ThemeProvider, THEME_ID, createTheme } from '@mui/material/styles';
 import {motion} from 'framer-motion';
 
-import photoURL from "../assets/profile.png";
 import {FaBars} from "react-icons/fa";
 import { AuthContext } from "../ultilities/providers/AuthProvider";
 import Swal from "sweetalert2";
@@ -212,7 +211,7 @@ const Navbar = () => {
 
                                 {
                                     user && <li>
-                                        <img src={currentUser && currentUser.photoURL ? currentUser.photoURL : photoURL} alt=""
+                                        <img src={currentUser && currentUser.photoURL} alt=""
                                             className="h-[40px] rounded-full w-[40px]"
                                         />
                                     </li>

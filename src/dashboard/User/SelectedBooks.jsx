@@ -32,7 +32,7 @@ const SelectedBooks = () => {
     });
   }, []);
 
-  const totalPrice = books.reduce((acc, item) => acc + parseInt(item.price), 0);
+  const totalPrice = books.reduce((acc, item) => acc + parseFloat(item.price), 0);
   const totalTax = totalPage * 0.01;
   const price = totalPrice + totalTax
 
@@ -106,7 +106,7 @@ const SelectedBooks = () => {
                           <td className='py-4'>{letIdx}</td>
                           <td className='py-4'>
                           <div className='flex items-center'>
-                          <img src={item.imageURL} alt='' className='h-16 w-16 mr-4'/>
+                          <img src={item.imageURL} alt='' className='h-24 w-16 mr-4'/>
                           <span>{item.bookTitle}</span>
                           </div>
                           </td>
@@ -134,6 +134,7 @@ const SelectedBooks = () => {
             </div>
 
             {/* right div */}
+            <div className='md:w-1/5 fixed right-3'>
             <div className='bg-white rounded-lg shadow-md p-6'>
             <h2 className='text-lg font-semibold mb-4'>Summary</h2>
             <div className='flex justify-between mb-2'>
@@ -155,10 +156,11 @@ const SelectedBooks = () => {
               <span className='font-semibold'>${price.toFixed(2 )}</span>
             </div>
             <button disabled={price <= 0}
-              onClick={() => navigate('/dashboard/user/payment', {state: { price: price, itemId: id}})}
+              onClick={() => navigate('/dashboard/user/payment', {state: { price: price, itemId: null}})}
               className='bg-secondary text-white py-2 px-4 rounded-lg mt-4 w-full'>
               Checkout
             </button>
+            </div>
             </div>
           </div>
         </div>

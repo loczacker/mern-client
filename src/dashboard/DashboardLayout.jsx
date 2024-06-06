@@ -21,8 +21,8 @@ const adminNavItems = [
 const userNavItems = [
   { to: "/dashboard/user", icon: <BiHomeAlt className='text-2xl' />, label: "Dashboard" },
   { to: "/dashboard/my-selected", icon: <BiSelectMultiple className='text-2xl' />, label: "My Selected" },
-  { to: "/dashboard/my-payments", icon: <MdPayments className='text-2xl' />, label: "Payment History" },
   { to: "/dashboard/my-favourite", icon: <MdIntegrationInstructions className='text-2xl' />, label: "Favourite Book" },
+  { to: "/dashboard/my-payments", icon: <MdPayments className='text-2xl' />, label: "Payment History" },
 ]
 
 const lastMenuItems = [
