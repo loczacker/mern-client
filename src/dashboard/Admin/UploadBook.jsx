@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { Button, Label, Select, TextInput, Textarea } from "flowbite-react";
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { storage } from '../../config/firebase.init';
 
 const UploadBook = () => {
   const bookCategories = [
@@ -35,32 +37,57 @@ const UploadBook = () => {
   }
 
   // handle book submission
-  const handleBookSubmit = (event) => {
+  const handleBookSubmit = async (event) => {
     event.preventDefault();
 
     const form = event.target;
-    const formData = new FormData(form);
 
-    formData.append('imageFile', imageFile); // Add the image file to form data
+    if (!imageFile) {
+      alert("Please select an image file");
+      return;
+    }
 
-    // Send form data to backend
-    fetch("http://localhost:5001/upload-book", {
-      method: "POST",
-      body: formData
-    })
-    .then(res => res.json())
-    .then(data => {
+    try {
+      // Upload file to Firebase Storage
+      const storageRef = ref(storage, `book-images/${imageFile.name}`);
+      await uploadBytes(storageRef, imageFile);
+      const imageUrl = await getDownloadURL(storageRef);
+
+      // Prepare form data
+      const formData = {
+        bookTitle: form.bookTitle.value,
+        authorName: form.authorName.value,
+        bookDescription: form.bookDescription.value,
+        bookPDFURL: form.bookPDFURL.value,
+        price: form.price.value,
+        category: selectedBookCategory,
+        imageURL: imageUrl
+      };
+
+      // Send form data to backend
+      const response = await fetch("http://localhost:5001/upload-book", {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      });
+
+      const data = await response.json();
       alert("Book uploaded successfully!!!");
       form.reset();
-    })
-    .catch(error => console.error('Error uploading book:', error));
-  }
+      setImageFile(null);
+    } catch (error) {
+      console.error('Error uploading book:', error);
+      toast.error("Error uploading book");
+    }
+  };
 
   return (
     <div className='px-4 my-12'>
       <h2 className='mb-8 text-3xl font-bold'>Upload A book</h2>
 
-      <form onSubmit={handleBookSubmit} className="flex lg:w-[1180px] flex-col flex-wrap gap-4">
+      <form onSubmit={handleBookSubmit} className="flex lg:w-[1400px] flex-col flex-wrap gap-4">
         {/* First row */}
         <div className='flex gap-8'>
           <div className='lg:w-1/2'>

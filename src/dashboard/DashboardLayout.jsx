@@ -75,7 +75,7 @@ const DashboardLayout = () => {
 return (
     <div className='flex'>
       <div
-        className={`${open ? "w-72 overflow-y-auto" :
+        className={`${open ? "w-80 overflow-y-auto" :
           "w-[90px] overflow-auto"} bg-white h-screen p-5 md:block hidden pt-8 relative duration-300`}>
         <div className='flex gap-x-4 items-center'>
           <img onClick={() => setOpen(!open)}

@@ -16,6 +16,7 @@ const ManageBooks = () => {
     }).then(res => res.json()).then(data => {
       alert("Book is deleted successfully")
       // setAllBooks(data);
+      setAllBooks(prevBooks => prevBooks.filter(book => book._id !== id));
     })
   }
   return (
@@ -24,7 +25,7 @@ const ManageBooks = () => {
 
       {/* table for book data */}
       <div className="overflow-x-auto">
-      <Table className='lg:w-[1180px]'>
+      <Table className='w-full'>
         <Table.Head>
           <Table.HeadCell>NO.</Table.HeadCell>
           <Table.HeadCell>Photo</Table.HeadCell>
@@ -43,7 +44,7 @@ const ManageBooks = () => {
               {index + 1}
             </Table.Cell>
             <Table.Cell>
-              <img src={book.imageURL} alt='' className='h-[70px] w-[50px]'/>
+              <img src={book.imageURL} alt='' className='h-[120px] w-[90px]'/>
             </Table.Cell>
             <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
               {book.bookTitle}

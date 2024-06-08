@@ -18,14 +18,13 @@ const GoogleLogin = () => {
                     email: user?.email,
                     photoURL: user?.photoURL || "https://i.pinimg.com/564x/d0/7b/a6/d07ba6dcf05fa86c0a61855bc722cb7a.jpg",
                     role: 'user',
-                    address: "Is not Provided",
-                    phone: "Is not Provided",
-                    about: "Is not Provided"
+                    address: "",
+                    phone: "",
+                    about: ""
                 }
 
                 if (user.email && user.displayName) {
                     try {
-                        // Kiểm tra email tồn tại
                         const emailCheck = await axios.get(`http://localhost:5001/check-email/${user.email}`);
                         if (!emailCheck.data.exists) {
                             await axios.post('http://localhost:5001/new-user', userImp);

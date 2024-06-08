@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useLoaderData, useParams } from 'react-router-dom';
 import { Button, Label, Select, TextInput, Textarea } from "flowbite-react";
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { storage } from '../../config/firebase.init';
 
 const EditBooks = () => {
   const { id } = useParams();
@@ -12,8 +14,9 @@ const EditBooks = () => {
     "Travel", "Religion", "Art and Design"
   ];
 
-  const [selectedBookCategory, setSelectedBookCategory] = useState(bookCategories[0]);
+  const [selectedBookCategory, setSelectedBookCategory] = useState(category || bookCategories[0]);
   const [selectedImage, setSelectedImage] = useState(imageURL || null);
+  const [imageFile, setImageFile] = useState(null);
 
   const handleChangeSelectedValue = (event) => {
     setSelectedBookCategory(event.target.value);
@@ -21,6 +24,7 @@ const EditBooks = () => {
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
+    setImageFile(file);
     const reader = new FileReader();
 
     reader.onload = () => {
@@ -32,20 +36,34 @@ const EditBooks = () => {
     }
   };
 
-  const handleUpdate = (event) => {
+  const handleUpdate = async (event) => {
     event.preventDefault();
     const form = event.target;
 
+    let imageURLToUpdate = selectedImage;
+
+    if (imageFile) {
+      // Upload file to Firebase Storage
+      const storageRef = ref(storage, `book-images/${imageFile.name}`);
+      await uploadBytes(storageRef, imageFile);
+      imageURLToUpdate = await getDownloadURL(storageRef);
+    }
+
     const bookTitle = form.bookTitle.value;
     const authorName = form.authorName.value;
-    const imageURL = selectedImage;
     const category = form.categoryName.value;
     const bookDescription = form.bookDescription.value;
     const bookPDFURL = form.bookPDFURL.value;
     const price = form.price.value;
 
     const updateBookObj = {
-      bookTitle, authorName, imageURL, category, bookDescription, bookPDFURL, price
+      bookTitle,
+      authorName,
+      imageURL: imageURLToUpdate,
+      category,
+      bookDescription,
+      bookPDFURL,
+      price
     };
 
     fetch(`http://localhost:5001/book/${id}`, {
@@ -63,7 +81,7 @@ const EditBooks = () => {
     <div className='px-4 my-12'>
       <h2 className='mb-8 text-3xl font-bold'>Update the book data</h2>
 
-      <form onSubmit={handleUpdate} className="flex lg:w-[1180px] flex-col flex-wrap gap-4">
+      <form onSubmit={handleUpdate} className="flex lg:w-[1400px] flex-col flex-wrap gap-4">
         {/* first row */}
         <div className='flex gap-8'>
           <div className='lg:w-1/2'>
@@ -96,7 +114,6 @@ const EditBooks = () => {
               name="imageFile"
               type="file"
               accept="image/*"
-              required
               onChange={handleImageChange} 
             />
 
@@ -157,4 +174,4 @@ const EditBooks = () => {
   );
 };
 
-export default EditBooks
+export default EditBooks;

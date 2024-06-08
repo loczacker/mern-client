@@ -28,9 +28,9 @@ const Register = () => {
             email: user?.email,
             photoURL: "",
             role: 'user',
-            address: "Is not Provided",
-            phone: "Is not Provided",
-            about: "Is not Provided"
+            address: "",
+            phone: "",
+            about: ""
           };
           if(user.email && user.displayName) {
             return axios.post('http://localhost:5001/new-user', userImp)

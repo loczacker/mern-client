@@ -25,7 +25,7 @@ const ManageUsers = () => {
   return (
     <div>
         <h1 className='text-center text-4xl font-bold my-7'>Manage <span className='text-secondary'>Users</span></h1>
-        <div className=''>
+        <div className='mr'>
         <div className='flex flex-col'>
             <div className='overflow-x-auto sm:-mx-6 lg:-mx-8'>
                 <div className='inline-block min-w-full py-2 sm:px-6 lg:px-8'>
@@ -49,7 +49,7 @@ const ManageUsers = () => {
                                     dark:hover:bg-neutral-600'>
                                         <td className='whitespace-nowrap px-6 py-4 font-medium'>{idx + 1}</td>
                                         <td className='whitespace-nowrap px-6 py-4'>
-                                            <img src={user?.photoURL} className='h-[35px] w-[35px]' alt=''/>
+                                            <img src={user?.photoURL} className='h-[100px] w-[100px]' alt=''/>
                                         </td>
                                         <td className='whitespace-nowrap px-6 py-4'>{user.name}</td>
                                         <td className='whitespace-nowrap px-6 py-4'>{user.role}</td>

@@ -11,7 +11,7 @@ const AdminStats = ({users}) => {
   return (
     <div>
         <div>
-        <div className='flex items-center bg-white border rounded-sm overflow-hidden'>
+        <div className='flex items-center bg-white border rounded-sm overflow-hidden mr-10'>
             <div className='p-4 bg-green-400'>
             <svg xmlns='http:/www.w3.org/2000/svg' className='h-12 w-12 text-white' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
                 <path strokeLinecap='round' strokeLinejoin='round' strokeWidth="2" d='M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6

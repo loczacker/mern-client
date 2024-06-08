@@ -1,30 +1,45 @@
 import React, { useState } from 'react';
 import useAuth from '../../hooks/useAuth';
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useNavigate } from 'react-router-dom';
 import useAxiosFetch from '../../hooks/useAxiosFetch';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { storage } from '../../config/firebase.init';
 
 const UpdateUsers = () => {
     const { user } = useAuth();
     const userCredentials = useLoaderData();
     const axiosFetch = useAxiosFetch();
     const axiosSecure = useAxiosSecure();
+    const navigate = useNavigate();
 
     const [selectedImage, setSelectedImage] = useState(userCredentials?.photoURL || '');
+    const [imageFile, setImageFile] = useState(null);
 
-    const handleFormSubmit = (e) => {
+    const handleFormSubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData(e.target);
-        const updatedData = Object.fromEntries(formData);
+        const updatedData = Object.fromEntries(formData.entries());
+
+        // Nếu người dùng chọn ảnh mới, upload ảnh lên Firebase Storage và cập nhật URL của ảnh
+        if (imageFile) {
+            const storageRef = ref(storage, `user-images/${imageFile.name}`);
+            await uploadBytes(storageRef, imageFile);
+            const imageURL = await getDownloadURL(storageRef);
+            updatedData.photoURL = imageURL; // Cập nhật URL của ảnh vào dữ liệu người dùng
+        }
+
         axiosSecure.patch(`/update-user/${userCredentials?._id}`, updatedData).then(res => {
             if (res.data.modifiedCount > 0) {
                 alert("User updated successfully!");
+                navigate('/dashboard/manage-users');
             }
         }).catch(err => console.log(err));
     }
 
     const handleImageChange = (event) => {
         const file = event.target.files[0];
+        setImageFile(file); // Lưu trữ file ảnh đã chọn
         const reader = new FileReader();
 
         reader.onload = () => {
