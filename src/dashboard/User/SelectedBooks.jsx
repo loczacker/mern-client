@@ -91,7 +91,6 @@ const SelectedBooks = () => {
                       <th className='text-left font-semibold'>#</th>
                       <th className='text-left font-semibold'>Product</th>
                       <th className='text-left font-semibold'>Price</th>
-                      <th className='text-left font-semibold'>Date</th>
                       <th className='text-left font-semibold'>Actions</th>
                     </tr>
                   </thead>

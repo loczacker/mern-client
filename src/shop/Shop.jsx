@@ -33,34 +33,34 @@ const Shop = () => {
   }
 
   //handle add to cart
-  const handleSelect = (id, bookTitle) => {
-    axiosSecure.get(`/book/${id}`)
-    // .then(res => setBooks(res.data)).catch(err => console.log(err));
-    if (!currentUser) {
-      navigate('/login');
-      return alert("Please Login First!")
-    }
+  // const handleSelect = (id, bookTitle) => {
+  //   axiosSecure.get(`/book/${id}`)
+  //   // .then(res => setBooks(res.data)).catch(err => console.log(err));
+  //   if (!currentUser) {
+  //     navigate('/login');
+  //     return alert("Please Login First!")
+  //   }
 
-    axiosSecure.get(`/cart-item/${id}?email=${currentUser.email}`)
-      .then(res => {
-        if (res.data.bookId === id) {
-          return alert("Already Selected")
-        } else {
-          const data = {
-            bookId: id,
-            bookTitle: bookTitle,
-            userMail: currentUser.email,
-            data: new Date()
-          }
+  //   axiosSecure.get(`/cart-item/${id}?email=${currentUser.email}`)
+  //     .then(res => {
+  //       if (res.data.bookId === id) {
+  //         return alert("Already Selected")
+  //       } else {
+  //         const data = {
+  //           bookId: id,
+  //           bookTitle: bookTitle,
+  //           userMail: currentUser.email,
+  //           data: new Date()
+  //         }
 
-          axiosSecure.post('/add-to-cart', data)
-            .then(res => {
-              alert("Successfully added to the cart!");
-              console.log(res.data)
-            })
-        }
-      })
-  }
+  //         axiosSecure.post('/add-to-cart', data)
+  //           .then(res => {
+  //             alert("Successfully added to the cart!");
+  //             console.log(res.data)
+  //           })
+  //       }
+  //     })
+  // }
 
   return (
     <div className='mt-28 px-4 lg:px-24'>
@@ -89,14 +89,14 @@ const Shop = () => {
                   leaveFrom="opacity-100"
                   leaveTo="opacity-0"
                 >
-                  <div className='absolute inset-0 flex items-center justify-center'>
+                  {/* <div className='absolute inset-0 flex items-center justify-center'>
                     <button
                       onClick={() => handleSelect(book._id, book.bookTitle)}
                       title={role === 'admin' ? 'Admin can not be able to select' : ''}
                       disabled={role === 'admin'}
                       className='px-4 py-2 text-white disabled:bg-red-300
                     bg-secondary duration-300 rounded hover:bg-red-700'>Add to cart</button>
-                  </div>
+                  </div> */}
                 </Transition>
 
                 {/*detail */} 
