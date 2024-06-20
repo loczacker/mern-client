@@ -33,7 +33,8 @@ const SelectedBooks = () => {
   }, []);
 
   const totalPrice = books.reduce((acc, item) => acc + parseFloat(item.price), 0);
-  const totalTax = totalPage * 0.01;
+  // const totalTax = totalPage * 0.01;
+  const totalTax = 0;
   const price = totalPrice + totalTax
 
   const handlePay = (id) => {
@@ -91,6 +92,7 @@ const SelectedBooks = () => {
                       <th className='text-left font-semibold'>#</th>
                       <th className='text-left font-semibold'>Product</th>
                       <th className='text-left font-semibold'>Price</th>
+                      <th className='text-left font-semibold'>Date</th>
                       <th className='text-left font-semibold'>Actions</th>
                     </tr>
                   </thead>
@@ -112,7 +114,7 @@ const SelectedBooks = () => {
                           <td className='py-4'>${item.price}</td>
                           <td className='py-4'>
                             <p className='text-green-700 text-sm'>
-                              {/* {moment(item.price).format("MMMM Do YYYY")} */}
+                              {moment(item.data).format("MMMM Do YYYY")}
                             </p>
                           </td>
                           <td className='py-4 flex pt-8 gap-2'>

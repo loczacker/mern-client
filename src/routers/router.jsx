@@ -21,6 +21,8 @@ import UpdateUsers from "../dashboard/Admin/UpdateUsers";
 import MyFavoriteBook from "../dashboard/User/MyFavoriteBook";
 import Payment from "../dashboard/User/Payment/Payment";
 import MyPaymentHistory from "../dashboard/User/Payment/History/MyPaymentHistory";
+import MyPurchased from "../dashboard/User/MyPurchased";
+import BookPurchasedDetail from "../dashboard/User/BookPurchasedDetail";
 
   const router = createBrowserRouter([
     {
@@ -66,6 +68,10 @@ import MyPaymentHistory from "../dashboard/User/Payment/History/MyPaymentHistory
           element: <UserCP/>
         },
         {
+          path: 'my-purchased',
+          element: <MyPurchased/>
+        },
+        {
           path: 'my-favorite-book',
           element: <MyFavoriteBook/>
         },
@@ -84,6 +90,12 @@ import MyPaymentHistory from "../dashboard/User/Payment/History/MyPaymentHistory
         {
           path: 'my-favourite',
           element: <MyFavoriteBook/>
+        },
+        {
+          path: 'book-purchased-detail/:id',
+          element: <BookPurchasedDetail/>,
+          loader: ({params}) => fetch(`http://localhost:5001/book/${params.id}`)
+
         },
 
         //Admin Routes

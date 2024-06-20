@@ -3,7 +3,7 @@ import useAuth from '../hooks/useAuth';
 import useUser from '../hooks/useUser';
 import { Link, NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { FaUsers } from 'react-icons/fa6';
-import { BiHomeAlt, BiLogInCircle, BiSelectMultiple } from 'react-icons/bi';
+import { BiHomeAlt, BiLogInCircle, BiPurchaseTag, BiSelectMultiple } from 'react-icons/bi';
 import { BsApp, BsBook } from 'react-icons/bs';
 import { MdBrowseGallery, MdIntegrationInstructions, MdOfflineBolt, MdPayments } from 'react-icons/md';
 import Swal from 'sweetalert2';
@@ -20,6 +20,7 @@ const adminNavItems = [
 
 const userNavItems = [
   { to: "/dashboard/user", icon: <BiHomeAlt className='text-2xl' />, label: "Dashboard" },
+  { to: "/dashboard/my-purchased", icon: <BiPurchaseTag className='text-2xl' />, label: "My Purchased" },
   { to: "/dashboard/my-selected", icon: <BiSelectMultiple className='text-2xl' />, label: "My Selected" },
   { to: "/dashboard/my-favourite", icon: <MdIntegrationInstructions className='text-2xl' />, label: "Favourite Book" },
   { to: "/dashboard/my-payments", icon: <MdPayments className='text-2xl' />, label: "Payment History" },
