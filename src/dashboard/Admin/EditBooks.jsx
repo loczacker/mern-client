@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useLoaderData, useParams } from 'react-router-dom';
+import { useLoaderData, useNavigate, useParams } from 'react-router-dom';
 import { Button, Label, Select, TextInput, Textarea } from "flowbite-react";
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { storage } from '../../config/firebase.init';
@@ -17,6 +17,7 @@ const EditBooks = () => {
   const [selectedBookCategory, setSelectedBookCategory] = useState(category || bookCategories[0]);
   const [selectedImage, setSelectedImage] = useState(imageURL || null);
   const [imageFile, setImageFile] = useState(null);
+  const navigate = useNavigate();
 
   const handleChangeSelectedValue = (event) => {
     setSelectedBookCategory(event.target.value);

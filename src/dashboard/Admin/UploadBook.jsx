@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Button, Label, Select, TextInput, Textarea } from "flowbite-react";
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { storage } from '../../config/firebase.init';
+import { useNavigate } from 'react-router-dom';
 
 const UploadBook = () => {
   const bookCategories = [
@@ -35,6 +36,8 @@ const UploadBook = () => {
   const handleFileChange = (event) => {
     setImageFile(event.target.files[0]);
   }
+
+  const navigate = useNavigate();
 
   // handle book submission
   const handleBookSubmit = async (event) => {
@@ -77,6 +80,7 @@ const UploadBook = () => {
       alert("Book uploaded successfully!!!");
       form.reset();
       setImageFile(null);
+      navigate('/dashboard/manage-book');
     } catch (error) {
       console.error('Error uploading book:', error);
       toast.error("Error uploading book");

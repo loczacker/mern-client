@@ -45,11 +45,11 @@ const ManageUsers = () => {
                                 {
                                     users.map((user, idx) => <tr
                                     key={user._id}
-                                    className='border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500
+                                    className='border-b transition font-medium duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500
                                     dark:hover:bg-neutral-600'>
                                         <td className='whitespace-nowrap px-6 py-4 font-medium'>{idx + 1}</td>
                                         <td className='whitespace-nowrap px-6 py-4'>
-                                            <img src={user?.photoURL} className='h-[100px] w-[100px]' alt=''/>
+                                            <img src={user?.photoURL} className='h-[120px] w-[120px]' alt=''/>
                                         </td>
                                         <td className='whitespace-nowrap px-6 py-4'>{user.name}</td>
                                         <td className='whitespace-nowrap px-6 py-4'>{user.role}</td>

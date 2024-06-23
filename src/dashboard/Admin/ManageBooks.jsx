@@ -44,7 +44,7 @@ const ManageBooks = () => {
               {index + 1}
             </Table.Cell>
             <Table.Cell>
-              <img src={book.imageURL} alt='' className='h-[120px] w-[90px]'/>
+              <img src={book.imageURL} alt='' className='h-[150px] w-[110px]'/>
             </Table.Cell>
             <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
               {book.bookTitle}
